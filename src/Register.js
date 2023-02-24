@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import './forms.css'
-import {auth,} from './firebase'
+import {auth} from './firebase'
 import {useNavigate, Link} from 'react-router-dom'
 import {createUserWithEmailAndPassword, sendEmailVerification} from 'firebase/auth'
 import {useAuthValue} from './AuthContext'
@@ -11,8 +11,10 @@ function Register() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState('')
+  //const [message, setMessage] = useState("");
   const navigate = useNavigate()
   const {setTimeActive} = useAuthValue()
+  //var result
 
   const validatePassword = () => {
     let isValid = true
@@ -24,8 +26,20 @@ function Register() {
     }
     return isValid
   }
+  const emailValidation = () => {
+    const regEx = /[a-z]+\.[0-9a-z]+@[vitstudent]+\.[ac]+\.[in]/g;
+    let r= true
+    if (regEx.test(email)) {
+      r=true
+    } else if (!regEx.test(email) && email !== "") {
+      r=false
+    }
+    return r
+  };
 
   const register = e => {
+    //result=e.emailValidation();
+    if(emailValidation()){
     e.preventDefault()
     setError('')
     if(validatePassword()) {
@@ -40,10 +54,15 @@ function Register() {
         })
         .catch(err => setError(err.message))
     }
+  }
+  else{
+    setError("Enter Vit email id")
+  }
     setEmail('')
     setPassword('')
     setConfirmPassword('')
   }
+
   return (
     <div className='center'>
       <div className='auth'>
@@ -72,6 +91,7 @@ function Register() {
             onChange={e => setConfirmPassword(e.target.value)}/>
 
           <button type='submit'>Register</button>
+         
         </form>
         <span>
           Already have an account?  
