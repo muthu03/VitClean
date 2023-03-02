@@ -42,7 +42,6 @@ function User() {
     }});
   return (
       <div>
-          <span onClick={() => signOut(auth)}>Sign Out</span>
           {user}
       </div>
   )
