@@ -1,4 +1,4 @@
-//import './profile.css'
+import './profile.css'
 import User from './User';
 import Form from './Form';
 import Table from './Table';
@@ -6,18 +6,15 @@ function Profile() {
   
 
   return (
-   <div>
+   <div className='FrontControl'>
     <div>
       <User />
     </div>
     
     <div>
+      <Table />
       <Form />
     </div>
-    <div>
-      <Table />
-    </div>
-
    </div>
 
 
